@@ -34,6 +34,7 @@ const Pdf = (props) => {
         <Text>Quote Details</Text>
         <View style={styles.section}>
           <Text>{props.value.firstname}</Text>
+          <Text>{props.value.amount}</Text>
         </View>
         <View style={styles.section}>
           <Text>

@@ -1,4 +1,6 @@
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import React, { useState } from "react";
+import Pdf from "./Pdf";
 
 export const Form = (props) => {
   const [quoteform, setQuoteForm] = useState({
@@ -12,7 +14,7 @@ export const Form = (props) => {
   const { firstname, lastname, email, phone, amount, isBallon } = quoteform;
   const getQuoteData = (e) => {
     e.preventDefault();
-    props.formData(quoteform);
+    //props.formData(quoteform);
   };
   const onFormChange = (name, value) => {
     setQuoteForm({ ...quoteform, [name]: value });
@@ -100,7 +102,14 @@ export const Form = (props) => {
           </li>
           <li>
             <button type="submit" className="quotedownloadbutton">
-              Get A Quote
+              <PDFDownloadLink
+                document={<Pdf value={quoteform} />}
+                fileName="quote.pdf"
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? "Loading document..." : <> Download The Quote</>
+                }
+              </PDFDownloadLink>
             </button>
           </li>
           <li></li>
