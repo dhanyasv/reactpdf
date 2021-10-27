@@ -1,6 +1,7 @@
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import React, { useState } from "react";
 import Pdf from "./Pdf";
+import { BlobProvider } from "@react-pdf/renderer";
 
 export const Form = (props) => {
   const [quoteform, setQuoteForm] = useState({
@@ -19,7 +20,9 @@ export const Form = (props) => {
   const onFormChange = (name, value) => {
     setQuoteForm({ ...quoteform, [name]: value });
   };
-
+  const openPDF = (url) => {
+    window.open(url, "_blank");
+  };
   return (
     props.showQuoteForm && (
       <form onSubmit={getQuoteData}>
@@ -101,16 +104,28 @@ export const Form = (props) => {
             />
           </li>
           <li>
-            <button type="submit" className="quotedownloadbutton">
-              <PDFDownloadLink
+            {/*<button type="submit" className="quotedownloadbutton">*/}
+            {/*<PDFDownloadLink
                 document={<Pdf value={quoteform} />}
                 fileName="quote.pdf"
               >
                 {({ blob, url, loading, error }) =>
-                  loading ? "Loading document..." : <> Download The Quote</>
+                  loading ? "Loading document..." : openPDF(url)
                 }
-              </PDFDownloadLink>
-            </button>
+              </PDFDownloadLink>*/}
+            <BlobProvider document={<Pdf value={quoteform} />}>
+              {({ url }) => (
+                <a
+                  className="quotedownloadbutton"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download Doc
+                </a>
+              )}
+            </BlobProvider>
+            {/*</button>*/}
           </li>
           <li></li>
         </ul>
