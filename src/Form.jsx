@@ -1,4 +1,4 @@
-import { PDFDownloadLink } from "@react-pdf/renderer";
+//import { PDFDownloadLink } from "@react-pdf/renderer";
 import React, { useState } from "react";
 import Pdf from "./Pdf";
 import { BlobProvider } from "@react-pdf/renderer";
@@ -20,9 +20,9 @@ export const Form = (props) => {
   const onFormChange = (name, value) => {
     setQuoteForm({ ...quoteform, [name]: value });
   };
-  const openPDF = (url) => {
-    window.open(url, "_blank");
-  };
+  //  const openPDF = (url) => {
+  //    window.open(url, "_blank");
+  //  };
   return (
     props.showQuoteForm && (
       <form onSubmit={getQuoteData}>
